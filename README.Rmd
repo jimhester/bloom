@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 # bloom #
 
-R language bindings for dablooms.
+Bloom filter for R using Rcpp bindings for [dablooms](https://github.com/bitly/dablooms/).
 
 ### Example usage
 

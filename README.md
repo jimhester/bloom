@@ -2,7 +2,7 @@
 bloom
 =====
 
-R language bindings for dablooms.
+Bloom filter for R using Rcpp bindings for [dablooms](https://github.com/bitly/dablooms/).
 
 ### Example usage
 
@@ -18,7 +18,7 @@ bloom$contains("foo")
 bloom$remove("foo", 2)
 #> [1] 1
 bloom$contains("foo")
-#> [1] FALSE
+#> [1] TRUE
 bloom$add("foo", 2)
 #> [1] 1
 rm(bloom)
