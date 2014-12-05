@@ -21,10 +21,14 @@ R language bindings for dablooms.
 
 ```{r}
 library(bloom)
-bloom <- new(bloom::bloom, 1000, .05, "/tmp/bloom.bin")
+bloom <- bloom(capacity = 1000, error_rate = .05, filename = "/tmp/bloom.bin")
 bloom$add("foo", 2)
-bloom$check("bar")
-bloom$check("foo")
+bloom$contains("bar")
+bloom$contains("foo")
 bloom$remove("foo", 2)
-bloom$check("foo")
+bloom$contains("foo")
+bloom$add("foo", 2)
+rm(bloom)
+bloom <- bloom(capacity = 1000, error_rate = .05, filename = "/tmp/bloom.bin", exists = TRUE)
+bloom$contains("foo")
 ```

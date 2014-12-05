@@ -8,15 +8,21 @@ R language bindings for dablooms.
 
 ``` r
 library(bloom)
-bloom <- new(bloom::bloom, 1000, .05, "/tmp/bloom.bin")
+bloom <- bloom(capacity = 1000, error_rate = .05, filename = "/tmp/bloom.bin")
 bloom$add("foo", 2)
-#> [1] TRUE
-bloom$check("bar")
-#> [1] 0
-bloom$check("foo")
 #> [1] 1
-bloom$remove("foo", 2)
+bloom$contains("bar")
+#> [1] FALSE
+bloom$contains("foo")
 #> [1] TRUE
-bloom$check("foo")
-#> [1] 0
+bloom$remove("foo", 2)
+#> [1] 1
+bloom$contains("foo")
+#> [1] FALSE
+bloom$add("foo", 2)
+#> [1] 1
+rm(bloom)
+bloom <- bloom(capacity = 1000, error_rate = .05, filename = "/tmp/bloom.bin", exists = TRUE)
+bloom$contains("foo")
+#> [1] TRUE
 ```

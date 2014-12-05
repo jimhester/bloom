@@ -30,16 +30,23 @@ class Bloom {
     scaling_bloom_t *filter;
 
   public:
-    Bloom() { filter = NULL; }
-    Bloom(unsigned int capacity, double error_rate, std::string filename) {
-      filter = new_scaling_bloom(capacity, error_rate, filename.c_str());
+    std::string filename;
+
+    Bloom(unsigned int capacity, double error_rate, const std::string filename, bool exists) {
+      this->filename = filename;
+      if (exists) {
+        filter = new_scaling_bloom_from_file(capacity, error_rate, filename.c_str());
+      }
+      else {
+        filter = new_scaling_bloom(capacity, error_rate, filename.c_str());
+      }
     }
     ~Bloom() {
       free_scaling_bloom(filter);
       filter = NULL;
     }
 
-    bool add(std::string key, unsigned int id) {
+    int add(std::string key, unsigned int id) {
       return scaling_bloom_add(filter, key.c_str(), key.length(), id);
     }
 
@@ -47,24 +54,21 @@ class Bloom {
       return scaling_bloom_check(filter, key.c_str(), key.length()) != 0;
     }
 
-    int check(std::string key) {
-      return scaling_bloom_check(filter, key.c_str(), key.length());
-    }
-
-    bool remove(std::string key, unsigned int id) {
+    int remove(std::string key, unsigned int id) {
       return scaling_bloom_remove(filter, key.c_str(), key.length(), id);
     }
+
 };
 
-RCPP_MODULE(bloom){
 
-  Rcpp::class_<Bloom>("bloom")
-    .constructor()
-    .constructor<unsigned int, double, std::string>("constructor")
+RCPP_MODULE(Bloom){
 
-    .method("add", &Bloom::add)
-    .method("contains", &Bloom::contains)
-    .method("check", &Bloom::check)
-    .method("remove", &Bloom::remove)
+  Rcpp::class_<Bloom>("Bloom")
+    .constructor<unsigned int, double, std::string, bool>("constructor")
+
+    .field_readonly("filename", &Bloom::filename, "disk location of bloom filter")
+    .method("add", &Bloom::add, "add an element to the bloom filter")
+    .method("contains", &Bloom::contains, "check if an element exists in the bloom filter")
+    .method("remove", &Bloom::remove, "remove an element from the bloom filter")
     ;
 }
