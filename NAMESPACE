@@ -1,0 +1,2 @@
+useDynLib(bloom)
+import(methods, Rcpp)

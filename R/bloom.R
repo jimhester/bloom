@@ -1,0 +1,1 @@
+loadModule("bloom", TRUE)
