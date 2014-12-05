@@ -1,0 +1,30 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+# bloom #
+
+R language bindings for dablooms.
+
+### Example usage
+
+```{r}
+library(bloom)
+bloom <- new(bloom::bloom, 1000, .05, "/tmp/bloom.bin")
+bloom$add("foo", 2)
+bloom$check("bar")
+bloom$check("foo")
+bloom$remove("foo", 2)
+bloom$check("foo")
+```
