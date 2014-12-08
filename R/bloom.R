@@ -26,7 +26,5 @@ bloom <- function(
   filename = tempfile(fileext=".bin"),
   exists = file.exists(filename)
   ) {
-
   new(bloom::Bloom, capacity, error_rate, filename, exists)
-
 }
