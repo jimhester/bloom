@@ -20,6 +20,14 @@ create a new filer.}
 \description{
 Create a new bloom filter, or load a bloom filter from a pre-existing file.
 }
+\details{
+The filter has the following methods available
+\describe{
+  \item{\code{add}}{Add a new item to the bloom filter, each item should be assigned a monotonically increasing id}
+  \item{\code{contains}}{Check if a given item is contained within the bloom filter}
+  \item{\code{remove}}{Remove a given item from the filter, the id should match the id given when the item was added}
+}
+}
 \examples{
 library(bloom)
 bloom <- bloom(capacity = 1000, error_rate = .05, filename = "/tmp/bloom.bin")
