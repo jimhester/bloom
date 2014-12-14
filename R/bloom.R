@@ -1,3 +1,5 @@
+#' @useDynLib bloom
+#' @import Rcpp
 loadModule("Bloom", TRUE)
 
 #' Bloom filter
@@ -14,6 +16,7 @@ loadModule("Bloom", TRUE)
 #'   \item{\code{contains}}{Check if a given item is contained within the bloom filter}
 #'   \item{\code{remove}}{Remove a given item from the filter, the id should match the id given when the item was added}
 #' }
+#' @export
 #' @examples
 #' library(bloom)
 #' bloom <- bloom(capacity = 1000, error_rate = .05, filename = "/tmp/bloom.bin")

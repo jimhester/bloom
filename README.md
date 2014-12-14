@@ -2,7 +2,9 @@
 bloom
 =====
 
-Bloom filter for R using Rcpp bindings for [dablooms](https://github.com/bitly/dablooms/).
+Scaling, counting Bloom filter for R using Rcpp bindings for [dablooms](https://github.com/bitly/dablooms/).
+
+Note the dablooms implementation requires an additional metadata id for insertions and deletions. This id is a monotonically increasing integer which is used to determine which scaling filter the item should be added or removed from.
 
 ### Example usage
 
