@@ -4,7 +4,7 @@ loadModule("Bloom", TRUE)
 
 #' Bloom filter
 #'
-#' Create a new bloom filter, or load a bloom filter from a pre-existing file.
+#' Create a new scaling, counting bloom filter, or load a bloom filter from a pre-existing file.
 #' @param capacity the approximate expected capacity
 #' @param error_rate the desired error rate
 #' @param filename the location to store the filter
@@ -12,9 +12,9 @@ loadModule("Bloom", TRUE)
 #' create a new filer.
 #' @details The filter has the following methods available
 #' \describe{
-#'   \item{\code{add}}{Add a new item to the bloom filter, each item should be assigned a monotonically increasing id}
-#'   \item{\code{contains}}{Check if a given item is contained within the bloom filter}
-#'   \item{\code{remove}}{Remove a given item from the filter, the id should match the id given when the item was added}
+#'   \item{\code{add}}{Add a new item to the bloom filter, each item should be assigned a monotonically increasing integer id as the second argument.}
+#'   \item{\code{contains}}{Check if a given item is contained within the bloom filter.}
+#'   \item{\code{remove}}{Remove a given item from the filter, the id should match the id given when the item was added.}
 #' }
 #' @export
 #' @examples
